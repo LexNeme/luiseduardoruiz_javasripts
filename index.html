@@ -1,39 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elaboramos piezas de cuero respetando el medio ambiente</title>
+    <title>Productos en Cuero</title>
     <!-- Aqui va el favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Iconos-->
-    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-    <!-- Simple line icons-->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.5.5/css/simple-line-icons.min.css" rel="stylesheet" />
-    <!-- Google fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />        
-    <link href="css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <!--Libreria Toastify-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <!-- Estilos-->
+    <link rel="stylesheet" href="./css/styles.css">
 </head>
-<body id="page-top">
-    <h1>Liatheria</h1>
-    <!-- Menú de navegación-->
-    <nav id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-            <li class="sidebar-nav-item"><a href="pages/mujer.html">Mujer</a></li>
-            <li class="sidebar-nav-item"><a href="pages/hombre.html">Hombre</a></li>
-            <li class="sidebar-nav-item"><a href="pages/sale.html">SALE</a></li>
-            <li class="sidebar-nav-item"><a href="pages/contacto.html">Contacto</a></li>
-        </ul>
-    </nav>
-    <!-- Cabecera-->
-    <header class="header">
-        <div class="container px-4 px-lg-5 text-center">
-            <h1 class="mb-1">Liatheria</h1>
-            <h3 class="mb-1"><em>¿Te gusta el cuero? ¿Quieres lucir un estilo elegante y atrevido?, Revisa nuestras piezas únicas.</em></h3>
-        </div>
-    </header>
+<body>
 
-    <script src="js/scripts.js"></script>
+    <div class="wrapper">
+        <header class="header-mobile">
+            <h1 class="logo"><img src="assets/logo.png" alt="..."></h1>
+            <button class="open-menu" id="open-menu">
+                <i class="bi bi-list"></i>
+            </button>
+        </header>
+        <aside>
+            <button class="close-menu" id="close-menu">
+                <i class="bi bi-x"></i>
+            </button>
+            <header>
+                <h1 class="logo"><img src="assets/logo.png" alt="...">Lo mejor del cuero</h1>
+            </header>
+            <nav>
+                <ul class="menu">
+                    <li>
+                        <button id="todos" class="boton-menu boton-categoria active"><i class="bi bi-shop"></i> Todos los productos</button>
+                    </li>
+                    <li>
+                        <button id="hombre" class="boton-menu boton-categoria"><i class="bi bi-caret-right"></i> Hombre</button>
+                    </li>
+                    <li>
+                        <button id="mujer" class="boton-menu boton-categoria"><i class="bi bi-caret-right"></i> Mujer</button>
+                    </li>
+                    <li>
+                        <button id="billeteras" class="boton-menu boton-categoria"><i class="bi bi-caret-right"></i> Billeteras</button>
+                    </li>
+                    <li>
+                        <button id="carteras" class="boton-menu boton-categoria"><i class="bi bi-caret-right"></i> Carteras</button>
+                    </li>
+                    <li>
+                        <button id="morrales" class="boton-menu boton-categoria"><i class="bi bi-caret-right"></i> Morrales</button>
+                    </li>
+                    <li>
+                        <a class="boton-menu boton-carrito" href="./carrito.html">
+                            <i class="bi bi-cart-fill"></i> Carrito <span id="numero" class="numero">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <footer>
+                <p class="texto-footer">@ Letheria 2023</p>
+            </footer>
+        </aside>
+        <main>
+            <h2 class="titulo-principal" id="titulo-principal">Todos los productos</h2>
+            <div id="contenedor-productos" class="contenedor-productos">
+                
+            </div>
+        </main>
+    </div>
+    <!-- libreria alerta producto agregado-->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <!-- Mis script-->
+    <script src="./js/main.js"></script>
+    <script src="./js/menu.js"></script>
 </body>
 </html>
