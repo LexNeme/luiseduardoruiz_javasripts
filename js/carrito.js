@@ -52,12 +52,10 @@ function cargarProductosCarrito() {
             contenedorCarritoProductos.append(div);
         });
 
-        // Actualizar los botones de eliminar
         actualizarBotonesEliminar();
-        // Actualizar el total
         actualizarTotal();
     } else {
-        // Mostrar el mensaje de carrito vacío
+        
         contenedorCarritoVacio.classList.remove("disabled");
         contenedorCarritoProductos.classList.add("disabled");
         contenedorCarritoAcciones.classList.add("disabled");
