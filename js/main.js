@@ -99,15 +99,15 @@ function agregarAlCarrito(e) {
         position: "right",
         stopOnFocus: true,
         style: {
-          background: "#7d590f",
-          borderRadius: "4px",
-          textTransform: "uppercase",
-          fontSize: "14px"
+        background: "#7d590f",
+        borderRadius: "4px",
+        textTransform: "uppercase",
+        fontSize: "14px"
         },
         offset: {
             x: '1.5rem',
             y: '1.5rem'
-          },
+        },
         onClick: function(){}
       }).showToast();
 

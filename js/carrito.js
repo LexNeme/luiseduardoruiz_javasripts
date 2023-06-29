@@ -86,10 +86,10 @@ function eliminarDelCarrito(e) {
         position: "right",
         stopOnFocus: true,
         style: {
-          background: "#7d590f",
-          borderRadius: "4px",
-          textTransform: "uppercase",
-          fontSize: ".75rem"
+        background: "#7d590f",
+        borderRadius: "4px",
+        textTransform: "uppercase",
+        fontSize: ".75rem"
         },
         offset: {
             x: '1.5rem',
@@ -117,18 +117,16 @@ function vaciarCarrito() {
     Swal.fire({
         title: '¿Estás seguro?',
         icon: 'question',
-        html: `Se van a borrar ${productosEnCarrito.reduce((acc, producto) => acc + producto.cantidad, 0)} productos.`,
+        html: `Se va a borrar ${productosEnCarrito.reduce((acc, producto) => acc + producto.cantidad, 0)} productos.`,
         showCancelButton: true,
         focusConfirm: false,
+        confirmButtonColor: '#7d590f',
         confirmButtonText: 'Sí',
         cancelButtonText: 'No'
     }).then((result) => {
-        if (result.isConfirmed) {
-            // Vaciar el carrito
-            productosEnCarrito.length = 0;
-            // Guardar los cambios en el almacenamiento local
-            localStorage.setItem("productos-en-carrito", JSON.stringify(productosEnCarrito));
-            // Volver a cargar los productos en el carrito
+        if (result.isConfirmed) {           
+            productosEnCarrito.length = 0;            
+            localStorage.setItem("productos-en-carrito", JSON.stringify(productosEnCarrito));            
             cargarProductosCarrito();
         }
     });
