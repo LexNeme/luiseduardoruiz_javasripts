@@ -13,6 +13,25 @@ const botonVaciar = document.querySelector("#carrito-acciones-vaciar");
 const contenedorTotal = document.querySelector("#total");
 const botonComprar = document.querySelector("#carrito-acciones-comprar");
 
+// Acción del formulario de datos de compra
+// Obtener referencias a los elementos de la ventana emergente datos de compra
+const ventanaEmergente = document.querySelector("#ventana-emergente");
+const formularioCompra = document.querySelector("#formulario-compra");
+const botonCerrarVentana = document.querySelector("#cerrar-ventana");
+function mostrarVentanaEmergente() {
+  ventanaEmergente.classList.remove("hidden");
+}
+function ocultarVentanaEmergente() {
+  ventanaEmergente.classList.add("hidden");
+}
+botonComprar.addEventListener("click", mostrarVentanaEmergente);
+formularioCompra.addEventListener("submit", function (e) {
+  e.preventDefault();
+  ocultarVentanaEmergente();
+});
+botonCerrarVentana.addEventListener("click", ocultarVentanaEmergente);
+// Fin del evento
+
 // Función para cargar los productos en el carrito en cada contenedor correspondiente
 function cargarProductosCarrito() {
     if (productosEnCarrito && productosEnCarrito.length > 0) {
@@ -66,7 +85,6 @@ function cargarProductosCarrito() {
 // Cargar los productos en el carrito
 cargarProductosCarrito();
 
-// Función para actualizar los botones de eliminar
 function actualizarBotonesEliminar() {
     botonesEliminar = document.querySelectorAll(".carrito-producto-eliminar");
 

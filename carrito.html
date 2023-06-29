@@ -70,9 +70,27 @@
                     </div>
                 </div>
 
-                <p id="carrito-comprado" class="carrito-comprado disabled">Muchas gracias por tu compra. <i class="bi bi-emoji-laughing"><br><br>Te enviamos un correo electrónico <i class="bi bi-envelope-check"></i> </i></p>
+                <p id="carrito-comprado" class="carrito-comprado disabled">Muchas gracias por elegirnos. <i class="bi bi-emoji-laughing"><br><br>Te enviamos un correo electrónico <i class="bi bi-envelope-check"></i> </i></p>
 
             </div>
+            
+        <!-- Formulario de tarjeta de ingreso de datos tarjeta-->
+            <div id="ventana-emergente" class="ventana-emergente hidden">
+                <h2>Completa tus datos para validar tu compra</h2>
+                <form id="formulario-compra">
+                  <label for="nombre">Nombre:</label>
+                  <input type="text" id="nombre" required>
+                  <label for="telefono">Teléfono:</label>
+                  <input type="text" id="telefono" required>
+                  <label for="direccion">Dirección:</label>
+                  <input type="text" id="direccion" required>
+                  <label for="tarjeta">Tarjeta de crédito:</label>
+                  <input type="text" id="tarjeta" required>
+                  <button type="submit" class="carrito-tarjeta-comprar">Comprar</button>
+                </form>
+                <button id="cerrar-ventana">Cerrar</button>
+              </div>
+
         </main>
     </div>
     <!-- libreria agregado-->
