@@ -293,9 +293,11 @@ main {
   
   /* Estilo para la ventana emergente */
   .ventana-emergente {
-    position: fixed;
+    position:absolute; 
+    width: 600px;
     top: 50%;
     left: 50%;
+    margin: auto;
     transform: translate(-50%, -50%);
     background-color: white;
     padding: 20px;
@@ -311,8 +313,10 @@ main {
   
   /* Estilo para el botón "Cerrar" dentro de la ventana emergente */
   #cerrar-ventana {
-    width: 100px;
+    width: 200px;
     height: 35px;
+    margin-left: 180px;
+    margin-top: 10px;
     border: 0;
     background-color: var(--clr-gray);
     border-radius: 4px;
@@ -324,16 +328,23 @@ main {
 
   form input {
     background-color: #dddddd;
+    position: relative;
+    width: 550px;
+    margin: 5px;
     color: #0a0a0a;
     border: 1px;
     border-color: #1e1e1e;
     border-radius: 4px;
     padding: 8px 30px;
   }
+  .completa-datos {
+    color: #3d3004;
+  }
 
   .carrito-tarjeta-comprar  {
-    width: 100px;
+    width: 200px;
     height: 35px;
+    margin: 6px 0px 0px 180px;
     border: 2px;
     background-color:rgb(174, 174, 174);
     border-radius: 4px;
