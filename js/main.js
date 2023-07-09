@@ -2,12 +2,12 @@
 let productos = [];
 
 // Obtener los datos de productos desde un archivo JSON
-fetch("./js/productos.js")
-    .then(response => response.json())
-    .then(data => {
-        productos = data;
-        cargarProductos(productos);
-    });
+fetch("./js/productos.json")
+  .then(response => response.json())
+  .then(data => {
+    productos = data;
+    cargarProductos();
+  });
 
 // Obtener referencias a los elementos del DOM
 const contenedorProductos = document.querySelector("#contenedor-productos");
@@ -16,13 +16,25 @@ const tituloPrincipal = document.querySelector("#titulo-principal");
 let botonesAgregar = document.querySelectorAll(".producto-agregar");
 const numero = document.querySelector("#numero");
 
+const buscador = document.querySelector("#buscador");
+buscador.addEventListener("input", filtrarProductos);
+
+function filtrarProductos() {
+    const texto = buscador.value.toLowerCase();
+    const productosFiltrados = productos.filter(producto =>
+      producto.titulo.toLowerCase().includes(texto)
+    );
+    cargarProductos(productosFiltrados);
+}
+
+
 // Event listener para ocultar el aside al hacer clic en un botón de categoría
 botonesCategorias.forEach(boton => boton.addEventListener("click", () => {
     aside.classList.remove("aside-visible");
 }));
 
 // Función para cargar los productos en el contenedor
-function cargarProductos(productosElegidos) {
+function cargarProductos(productosElegidos = productos) {
     // Limpiar el contenedor de productos
     contenedorProductos.innerHTML = "";
 
@@ -109,7 +121,7 @@ function agregarAlCarrito(e) {
             y: '1.5rem'
         },
         onClick: function(){}
-      }).showToast();
+}).showToast();
 
     const idBoton = e.currentTarget.id;
     const productoAgregado = productos.find(producto => producto.id === idBoton);
@@ -136,3 +148,4 @@ function actualizarnumero() {
     let nuevonumero = productosEnCarrito.reduce((acc, producto) => acc + producto.cantidad, 0);
     numero.innerText = nuevonumero;
 }
+

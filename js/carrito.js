@@ -1,3 +1,4 @@
+
 // Obtener los productos en el carrito desde el almacenamiento local
 let productosEnCarrito = localStorage.getItem("productos-en-carrito");
 // Parsear los productos en el carrito de JSON a un objeto JavaScript
@@ -12,25 +13,6 @@ let botonesEliminar = document.querySelectorAll(".carrito-producto-eliminar");
 const botonVaciar = document.querySelector("#carrito-acciones-vaciar");
 const contenedorTotal = document.querySelector("#total");
 const botonComprar = document.querySelector("#carrito-acciones-comprar");
-
-// Acción del formulario de datos de compra
-// Obtener referencias a los elementos de la ventana emergente datos de compra
-const ventanaEmergente = document.querySelector("#ventana-emergente");
-const formularioCompra = document.querySelector("#formulario-compra");
-const botonCerrarVentana = document.querySelector("#cerrar-ventana");
-function mostrarVentanaEmergente() {
-  ventanaEmergente.classList.remove("hidden");
-}
-function ocultarVentanaEmergente() {
-  ventanaEmergente.classList.add("hidden");
-}
-botonComprar.addEventListener("click", mostrarVentanaEmergente);
-formularioCompra.addEventListener("submit", function (e) {
-  e.preventDefault();
-  ocultarVentanaEmergente();
-});
-botonCerrarVentana.addEventListener("click", ocultarVentanaEmergente);
-// Fin del evento
 
 // Función para cargar los productos en el carrito en cada contenedor correspondiente
 function cargarProductosCarrito() {
@@ -71,10 +53,105 @@ function cargarProductosCarrito() {
             contenedorCarritoProductos.append(div);
         });
 
+
+// Inicio de este Evento click para comprar en el carrito (llenado de formulario)
+botonComprar.addEventListener("click", mostrarVentanaEmergente);
+
+function mostrarVentanaEmergente() {
+    // Crear elementos HTML para la ventana emergente
+    const ventanaEmergente = document.createElement("div");
+    ventanaEmergente.classList.add("ventana-emergente");
+
+    const formulario = document.createElement("form");
+    formulario.classList.add("formulario");
+
+    const titulo = document.createElement("h2");
+    titulo.textContent = "Completa tus datos";
+    formulario.appendChild(titulo);
+
+    const nombreLabel = document.createElement("label");
+    nombreLabel.textContent = "Nombre:";
+    const nombreInput = document.createElement("input");
+    nombreInput.setAttribute("type", "text");
+    nombreInput.setAttribute("required", "true");
+    nombreLabel.appendChild(nombreInput);
+    formulario.appendChild(nombreLabel);
+
+    const telefonoLabel = document.createElement("label");
+    telefonoLabel.textContent = "Teléfono:";
+    const telefonoInput = document.createElement("input");
+    telefonoInput.setAttribute("type", "number");
+    telefonoInput.setAttribute("required", "true");
+    telefonoLabel.appendChild(telefonoInput);
+    formulario.appendChild(telefonoLabel);
+
+    const direccionLabel = document.createElement("label");
+    direccionLabel.textContent = "Dirección:";
+    const direccionInput = document.createElement("input");
+    direccionInput.setAttribute("type", "text");
+    direccionInput.setAttribute("required", "true");
+    direccionLabel.appendChild(direccionInput);
+    formulario.appendChild(direccionLabel);
+
+    const tarjetaLabel = document.createElement("label");
+    tarjetaLabel.textContent = "Número de Tarjeta:";
+    const tarjetaInput = document.createElement("input");
+    tarjetaInput.setAttribute("type", "number");
+    tarjetaInput.setAttribute("required", "true");
+    tarjetaLabel.appendChild(tarjetaInput);
+    formulario.appendChild(tarjetaLabel);
+
+    const botonCerrar = document.createElement("button");
+    botonCerrar.classList.add("boton-cerrar");
+    botonCerrar.textContent = "Cerrar";
+    formulario.appendChild(botonCerrar);
+
+    const botonEnviar = document.createElement("button");
+    botonEnviar.classList.add("boton-enviar");
+    botonEnviar.setAttribute("type", "submit");
+    botonEnviar.textContent = "Enviar datos";
+    formulario.appendChild(botonEnviar);
+
+    ventanaEmergente.appendChild(formulario);
+    document.body.appendChild(ventanaEmergente);
+
+    // Escuchar evento de cierre de la ventana emergente
+    botonCerrar.addEventListener("click", cerrarVentanaEmergente);
+    formulario.addEventListener("submit", enviarFormulario);
+}
+
+function cerrarVentanaEmergente() {
+    const ventanaEmergente = document.querySelector(".ventana-emergente");
+    ventanaEmergente.remove();
+}
+
+function enviarFormulario(event) {
+    event.preventDefault();
+
+    const nombre = event.target.elements[0].value;
+    const telefono = event.target.elements[1].value;
+    const direccion = event.target.elements[2].value;
+    const tarjeta = event.target.elements[3].value;
+
+ 
+    // Cerrar la ventana emergente
+    cerrarVentanaEmergente();
+
+    // Mostrar mensaje de agradecimiento
+    const mensajeAgradecimiento = document.createElement("p");
+    mensajeAgradecimiento.textContent = "¡Gracias por tu compra!";
+    mensajeAgradecimiento.classList.add("mensaje-agradecimiento");
+    contenedorCarritoComprado.appendChild(mensajeAgradecimiento);
+}
+//fin de este proceso
+
+
+        // Actualizar los botones de eliminar
         actualizarBotonesEliminar();
+        // Actualizar el total
         actualizarTotal();
     } else {
-        
+        // Mostrar el mensaje de carrito vacío
         contenedorCarritoVacio.classList.remove("disabled");
         contenedorCarritoProductos.classList.add("disabled");
         contenedorCarritoAcciones.classList.add("disabled");
@@ -85,6 +162,7 @@ function cargarProductosCarrito() {
 // Cargar los productos en el carrito
 cargarProductosCarrito();
 
+// Función para actualizar los botones de eliminar
 function actualizarBotonesEliminar() {
     botonesEliminar = document.querySelectorAll(".carrito-producto-eliminar");
 
@@ -135,16 +213,18 @@ function vaciarCarrito() {
     Swal.fire({
         title: '¿Estás seguro?',
         icon: 'question',
-        html: `Se va a borrar ${productosEnCarrito.reduce((acc, producto) => acc + producto.cantidad, 0)} productos.`,
+        html: `Se van a borrar ${productosEnCarrito.reduce((acc, producto) => acc + producto.cantidad, 0)} productos.`,
         showCancelButton: true,
         focusConfirm: false,
-        confirmButtonColor: '#7d590f',
         confirmButtonText: 'Sí',
         cancelButtonText: 'No'
     }).then((result) => {
-        if (result.isConfirmed) {           
-            productosEnCarrito.length = 0;            
-            localStorage.setItem("productos-en-carrito", JSON.stringify(productosEnCarrito));            
+        if (result.isConfirmed) {
+            // Vaciar el carrito
+            productosEnCarrito.length = 0;
+            // Guardar los cambios en el almacenamiento local
+            localStorage.setItem("productos-en-carrito", JSON.stringify(productosEnCarrito));
+            // Volver a cargar los productos en el carrito
             cargarProductosCarrito();
         }
     });
